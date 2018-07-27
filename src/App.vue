@@ -23,7 +23,7 @@ body {
 }
 
 .container {
-	width: 60%;
+	width: 50%;
 	margin: auto;
 	padding-top: 24px;
 }
