@@ -11,5 +11,6 @@ export default new Router({
 			name: 'landing-page',
 			component: LandingPage
 		}
-	]
+	],
+	mode: 'history'
 });
