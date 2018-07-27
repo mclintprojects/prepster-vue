@@ -7,18 +7,18 @@
       <img src="https://res.cloudinary.com/mclint-cdn/image/upload/v1532669830/prepster/Group_14.svg" alt="logo" />
       <p>Welcome to <span>Prepster</span></p>
       <p>Search millions of quizzes or create and challenge your friends to your own. Attain mastery by studying with fun, competitive handmade quizzes.</p>
-      <el-button id="btn-signup" class="btn-primary" round @click="showSignupDialog = true">Get started</el-button>
+      <el-button id="btn-signup" class="btn btn-primary" round @click="showSignupDialog = true">Get started</el-button>
     </div>
     <el-dialog title="Login" :visible.sync="showLoginDialog">
       <login-dialog :show="showLoginDialog" />
       <span slot="footer" class="dialog-footer">
-          <el-button type="primary" round>Login</el-button>
+          <el-button type="primary" round class="btn">Login</el-button>
       </span>
     </el-dialog>
 		<el-dialog title="Signup" :visible.sync="showSignupDialog">
       <signup-dialog :show="showSignupDialog" />
       <span slot="footer" class="dialog-footer">
-          <el-button type="primary" round>Signup</el-button>
+          <el-button type="primary" round class="btn">Signup</el-button>
       </span>
     </el-dialog>
   </div>

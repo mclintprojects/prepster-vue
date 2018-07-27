@@ -40,11 +40,14 @@ body {
 
 .btn-primary {
 	box-shadow: 0px 4px 4px 0px rgba(167, 167, 167, 0.25);
+	height: 50px;
+}
+
+.btn {
 	border: 0px solid transparent !important;
 	text-transform: uppercase;
 	font-family: 'Poppins';
 	font-size: 13px !important;
-	height: 50px;
 	border-radius: 60px !important;
 }
 
