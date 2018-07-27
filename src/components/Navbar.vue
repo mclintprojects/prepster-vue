@@ -3,7 +3,6 @@
         <p id="brand">Prepster</p>
         <div class="flex center-vertical">
             <p>Login</p>
-            <p>Signup</p>
         </div>
     </div>
 </template>
@@ -21,22 +20,19 @@ export default {};
 
 	#brand {
 		font-size: 16px;
+		font-weight: bold;
 	}
 
 	div.flex {
 		p {
 			text-transform: uppercase;
-			font-size: 12px;
+			font-size: 14px;
 			color: var(--secondary-text-color);
 
 			&:hover {
 				cursor: pointer;
 				color: var(--primary-text-color);
 			}
-		}
-
-		p:nth-child(1) {
-			margin-right: 36px;
 		}
 	}
 }

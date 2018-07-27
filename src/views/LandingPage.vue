@@ -4,7 +4,7 @@
     <div id="content" class="flex center-vertical center-horizontal">
       <img src="https://res.cloudinary.com/mclint-cdn/image/upload/v1532669830/prepster/Group_14.svg" alt="logo" />
       <p>Welcome to <span>Prepster</span></p>
-      <p>Challenge your friends with your handmade prep quizzes. Study by competing for the spot at the top of the leaderboard.</p>
+      <p>Search millions of quizzes or create and challenge your friends to your own. Attain mastery by studying with fun, competitive handmade quizzes.</p>
       <el-button class="btn-primary" round>Get started</el-button>
     </div>
   </div>
