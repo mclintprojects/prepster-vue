@@ -21,6 +21,11 @@ body {
 	background: #eeeeee;
 }
 
+.container {
+	width: 30%;
+	margin: auto;
+}
+
 .flex {
 	display: flex;
 }
@@ -41,5 +46,27 @@ body {
 	font-size: 13px !important;
 	height: 50px;
 	border-radius: 60px !important;
+}
+
+.el-dialog {
+	width: 30% !important;
+}
+
+.el-input {
+	margin-top: 4px !important;
+}
+
+@media only screen and (max-width: 567px) {
+	.container {
+		width: 95%;
+	}
+
+	.el-dialog {
+		width: 90% !important;
+	}
+
+	.container {
+		width: calc(100% - 32px);
+	}
 }
 </style>

@@ -1,20 +1,43 @@
 <template>
-  <div class="app-container">
-    <navbar />
+  <div>
+    <navbar>
+      <p @click="showLoginDialog = true">Login</p>
+    </navbar>
     <div id="content" class="flex center-vertical center-horizontal">
       <img src="https://res.cloudinary.com/mclint-cdn/image/upload/v1532669830/prepster/Group_14.svg" alt="logo" />
       <p>Welcome to <span>Prepster</span></p>
       <p>Search millions of quizzes or create and challenge your friends to your own. Attain mastery by studying with fun, competitive handmade quizzes.</p>
-      <el-button class="btn-primary" round>Get started</el-button>
+      <el-button id="btn-signup" class="btn-primary" round @click="showSignupDialog = true">Get started</el-button>
     </div>
+    <el-dialog title="Login" :visible.sync="showLoginDialog">
+      <login-dialog :show="showLoginDialog" />
+      <span slot="footer" class="dialog-footer">
+          <el-button type="primary" round>Login</el-button>
+      </span>
+    </el-dialog>
+		<el-dialog title="Signup" :visible.sync="showSignupDialog">
+      <signup-dialog :show="showSignupDialog" />
+      <span slot="footer" class="dialog-footer">
+          <el-button type="primary" round>Signup</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
 <script>
 import Navbar from '../components/Navbar';
+import LoginDialog from '../components/dialogs/Login';
+import SignupDialog from '../components/dialogs/Signup';
 
 export default {
-	components: { Navbar }
+	components: { Navbar, LoginDialog, SignupDialog },
+	data() {
+		return {
+			showLoginDialog: false,
+			showSignupDialog: false
+		};
+	},
+	methods: {}
 };
 </script>
 
@@ -44,7 +67,7 @@ export default {
 		}
 	}
 
-	.el-button {
+	#btn-signup {
 		margin-top: 40px;
 	}
 }
