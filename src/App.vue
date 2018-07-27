@@ -12,6 +12,7 @@
 
 :root {
 	--primary-color: #b8eeee;
+	--primary-color-dark: #6fcece;
 	--primary-text-color: rgba(0, 0, 0, 0.8);
 	--secondary-text-color: rgba(0, 0, 0, 0.54);
 }
@@ -22,12 +23,14 @@ body {
 }
 
 .container {
-	width: 30%;
+	width: 60%;
 	margin: auto;
+	padding-top: 24px;
 }
 
 .flex {
 	display: flex;
+	flex-wrap: wrap;
 }
 
 .center-vertical {
@@ -57,6 +60,17 @@ body {
 
 .el-input {
 	margin-top: 4px !important;
+}
+
+.subtitle {
+	font-size: 12px;
+	margin-bottom: 4px;
+	color: var(--secondary-text-color);
+	text-transform: uppercase;
+}
+
+.shadow {
+	box-shadow: 0px 4px 4px 0px rgba(167, 167, 167, 0.25);
 }
 
 @media only screen and (max-width: 567px) {
