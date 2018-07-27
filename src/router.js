@@ -3,6 +3,9 @@ import Router from 'vue-router';
 import LandingPage from './views/LandingPage.vue';
 import Home from './views/Home.vue';
 import Quizzes from './views/Quizzes.vue';
+import Collections from './views/Collections.vue';
+import Search from './views/Search.vue';
+import { Col } from 'element-ui';
 
 Vue.use(Router);
 
@@ -14,14 +17,24 @@ export default new Router({
 			component: LandingPage
 		},
 		{
-			path: '/home',
-			name: 'home',
+			path: '/app',
+			name: 'app',
 			component: Home,
 			children: [
 				{
-					path: '/',
-					name: 'quizzes',
+					path: 'home',
+					name: 'home',
 					component: Quizzes
+				},
+				{
+					path: 'collections',
+					name: 'collections',
+					component: Collections
+				},
+				{
+					path: 'search',
+					name: 'search',
+					component: Search
 				}
 			]
 		}

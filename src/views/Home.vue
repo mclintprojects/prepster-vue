@@ -5,7 +5,7 @@
                 <img src="https://res.cloudinary.com/mclint-cdn/image/upload/v1532679294/prepster/twotone-home-24px.svg" />
                 <p>Home</p>
             </div>
-            <div @click="navigateTo('collection')" class="main-menu-item" :class="{highlight: shouldHighlight('collection')}">
+            <div @click="navigateTo('collections')" class="main-menu-item" :class="{highlight: shouldHighlight('collections')}">
                 <img src="https://res.cloudinary.com/mclint-cdn/image/upload/v1532679298/prepster/twotone-shopping_basket-24px.svg" />
                 <p>Collections</p>
             </div>
@@ -59,7 +59,7 @@ export default {
 		}
 	},
 	created() {
-		this.$router.push('/');
+		this.$router.push({ name: 'home' });
 	}
 };
 </script>

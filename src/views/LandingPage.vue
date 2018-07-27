@@ -1,8 +1,9 @@
 <template>
   <div>
-    <navbar>
+    <div id="navbar" class="flex center-vertical">
+      <p>Prepster</p>
       <p @click="showLoginDialog = true">Login</p>
-    </navbar>
+    </div>
     <div id="content" class="flex center-vertical center-horizontal">
       <img src="https://res.cloudinary.com/mclint-cdn/image/upload/v1532669830/prepster/Group_14.svg" alt="logo" />
       <p>Welcome to <span>Prepster</span></p>
@@ -25,12 +26,11 @@
 </template>
 
 <script>
-import Navbar from '../components/Navbar';
 import LoginDialog from '../components/dialogs/Login';
 import SignupDialog from '../components/dialogs/Signup';
 
 export default {
-	components: { Navbar, LoginDialog, SignupDialog },
+	components: { LoginDialog, SignupDialog },
 	data() {
 		return {
 			showLoginDialog: false,
@@ -42,9 +42,26 @@ export default {
 </script>
 
 <style lang="scss">
+#navbar {
+	padding: 16px;
+	background: white;
+	justify-content: space-between;
+
+	p:nth-last-child(1) {
+		text-transform: uppercase;
+		font-size: 13px;
+		color: var(--secondary-text-color);
+		cursor: pointer;
+
+		&:hover {
+			color: var(--primary-text-color);
+		}
+	}
+}
+
 #content {
 	flex-direction: column;
-	min-height: calc(100vh - 55px);
+	min-height: calc(100vh - 57px);
 	text-align: center;
 	background-color: #b8eeee;
 	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='390' height='46.8' viewBox='0 0 1000 120'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='10' %3E%3Cpath d='M-500 75c0 0 125-30 250-30S0 75 0 75s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500 45c0 0 125-30 250-30S0 45 0 45s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500 105c0 0 125-30 250-30S0 105 0 105s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500 15c0 0 125-30 250-30S0 15 0 15s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500-15c0 0 125-30 250-30S0-15 0-15s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500 135c0 0 125-30 250-30S0 135 0 135s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3C/g%3E%3C/svg%3E");

@@ -89,13 +89,13 @@ export default {
 
 	&:hover {
 		background: rgb(243, 243, 243);
-		border-bottom: 2px solid var(--primary-color);
+		border-bottom: 2px solid var(--primary-color-dark);
 		cursor: pointer;
 	}
 }
 
 .highlight {
-	border-bottom: 2px solid var(--primary-color);
+	border-bottom: 2px solid var(--primary-color-dark);
 }
 
 @media only screen and (max-width: 567px) {
