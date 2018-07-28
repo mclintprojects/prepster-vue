@@ -9,7 +9,7 @@ import './theme.scss';
 
 Vue.use(Element);
 Vue.config.productionTip = false;
-axios.defaults.baseURL = 'https://prepster.netlify.com';
+axios.defaults.baseURL = 'https://prepster.herokuapp.com';
 
 new Vue({
 	router,
