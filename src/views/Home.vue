@@ -1,9 +1,9 @@
 <template>
     <div>
         <navbar>
-            <div @click="navigateTo('home')" class="main-menu-item" :class="{highlight: shouldHighlight('home')}">
-                <img src="https://res.cloudinary.com/mclint-cdn/image/upload/v1532679294/prepster/twotone-home-24px.svg" />
-                <p>Home</p>
+            <div @click="navigateTo('quizzes')" class="main-menu-item" :class="{highlight: shouldHighlight('quizzes')}">
+                <img src="https://res.cloudinary.com/mclint-cdn/image/upload/v1532750735/prepster/twotone-assignment-24px.svg" />
+                <p>Quizzes</p>
             </div>
             <div @click="navigateTo('collections')" class="main-menu-item" :class="{highlight: shouldHighlight('collections')}">
                 <img src="https://res.cloudinary.com/mclint-cdn/image/upload/v1532679298/prepster/twotone-shopping_basket-24px.svg" />
@@ -27,12 +27,12 @@
 <script>
 import Navbar from '../components/Navbar';
 
-const TOP_LEVEL_ROUTES = ['home', 'collections', 'search'];
+const TOP_LEVEL_ROUTES = ['quizzes', 'collections', 'search'];
 export default {
 	components: { Navbar },
 	data() {
 		return {
-			selectedComponent: 'home'
+			selectedComponent: 'quizzes'
 		};
 	},
 	watch: {
@@ -56,9 +56,6 @@ export default {
 				if (to.name == route) this.selectedComponent = route;
 			});
 		}
-	},
-	created() {
-		this.$router.push({ name: 'home' });
 	}
 };
 </script>

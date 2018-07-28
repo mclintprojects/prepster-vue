@@ -5,9 +5,9 @@
 
 		<div id="create-container" class="flex">
         	<p class="subtitle" style="margin-top: 40px">Your quizzes</p>
-			<el-button class="btn bg-primary">Create quiz</el-button>
+			<el-button class="btn bg-primary" @click="createQuiz" round>Create quiz</el-button>
 		</div>
-		<empty-state v-if="quizzes.length == 0" src="https://image.flaticon.com/icons/svg/984/984199.svg" title="Quizzes" subtitle="You haven't created any quizzes yet" />
+		<empty-state v-if="quizzes.length == 0" src="https://res.cloudinary.com/mclint-cdn/image/upload/v1532750735/prepster/twotone-assignment-24px.svg" title="Quizzes" subtitle="You haven't created any quizzes yet" />
         <quiz v-for="(quiz, index) in quizzes" :key="index" :quiz="quizzes[index]" />
     </div>
 </template>
@@ -32,6 +32,11 @@ export default {
 			return this.$store.getters.quizzes;
 		}
 	},
+	methods: {
+		createQuiz() {
+			this.$router.push({ name: 'create-quiz' });
+		}
+	},
 	created() {
 		this.date = eventbus.getDate();
 		this.$store.dispatch('getQuizzes');
@@ -44,5 +49,6 @@ export default {
 	justify-content: space-between;
 	align-items: baseline;
 	width: 100%;
+	margin-bottom: 16px;
 }
 </style>

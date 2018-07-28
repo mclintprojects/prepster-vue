@@ -5,6 +5,7 @@ import Home from './views/Home.vue';
 import Quizzes from './views/Quizzes.vue';
 import Collections from './views/Collections.vue';
 import Search from './views/Search.vue';
+import CreateQuiz from './views/CreateQuiz.vue';
 
 Vue.use(Router);
 
@@ -21,8 +22,8 @@ export default new Router({
 			component: Home,
 			children: [
 				{
-					path: 'home',
-					name: 'home',
+					path: 'quizzes',
+					name: 'quizzes',
 					component: Quizzes
 				},
 				{
@@ -34,6 +35,11 @@ export default new Router({
 					path: 'search',
 					name: 'search',
 					component: Search
+				},
+				{
+					path: 'new/quiz',
+					name: 'create-quiz',
+					component: CreateQuiz
 				}
 			]
 		}

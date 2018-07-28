@@ -20,6 +20,12 @@ export default {
 	padding: 16px;
 	border-radius: 10px;
 	justify-content: space-between;
+	margin-bottom: 16px;
+
+	&:hover{
+		background: var(--primary-color-dark);
+		cursor: pointer;
+	}
 
 	> div {
 		p:nth-child(1) {
