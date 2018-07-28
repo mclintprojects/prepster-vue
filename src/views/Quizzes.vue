@@ -35,6 +35,10 @@ export default {
 	methods: {
 		createQuiz() {
 			this.$router.push({ name: 'create-quiz' });
+		},
+		onQuizFinish(index) {},
+		onQuizClicked(index) {
+			this.$store.dispatch('deleteQuiz', this.quizzes[index].id, index);
 		}
 	},
 	created() {

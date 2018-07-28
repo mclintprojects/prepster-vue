@@ -5,7 +5,7 @@
                 <div @click="itemSelected(index)" class="checkbox" :class="{'checkbox-selected': isSelected(index)}"></div>
             </el-col>
             <el-col :span="22">
-                <el-input type="text" placeholder="Enter a possible answer here">
+                <el-input v-model="answers[index].text" type="text" placeholder="Enter a possible answer here">
                     <el-button @click="deletePossibleAnswer(index)" v-if="answers.length > 1" slot="append" type="danger" icon="el-icon-delete" round/>
                 </el-input>
             </el-col>
@@ -36,7 +36,7 @@ export default {
 		},
 		itemSelected(index) {
 			this.selected = index;
-			onItemSelected(index);
+			this.onItemSelected(index);
 		}
 	}
 };

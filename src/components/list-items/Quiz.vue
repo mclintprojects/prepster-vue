@@ -4,13 +4,14 @@
             <p>{{quiz.is_completed ? '' : '(Draft)'}} {{quiz.title}}</p>
             <p>{{quiz.questions_count}} questions added</p>
         </div>
-        <el-button class="btn bg-primary" round>Finish</el-button>
     </div>
 </template>
 
 <script>
 export default {
-	props: { quiz: { type: Object, default: () => {} } },
+	props: {
+		quiz: { type: Object, default: () => {} }
+	},
 	methods: {
 		showQuizDetails() {
 			this.$router.push({
@@ -31,8 +32,12 @@ export default {
 	margin-bottom: 16px;
 
 	&:hover {
-		background: var(--primary-color-dark);
+		background: var(--primary-color);
 		cursor: pointer;
+
+		.bg-primary {
+			background: white !important;
+		}
 	}
 
 	> div {

@@ -25,15 +25,16 @@ export default {
 	padding: 16px;
 	border-radius: 10px;
 	justify-content: space-between;
+	margin-bottom: 16px;
 
 	&:hover {
 		background: var(--primary-color);
 
-        div:nth-child(1) {
-		    div:nth-child(1) {
-			    background: white;
-		    }
-        }
+		div:nth-child(1) {
+			div:nth-child(1) {
+				background: white;
+			}
+		}
 	}
 
 	div:nth-child(1) {
@@ -58,7 +59,7 @@ export default {
 			color: var(--secondary-text-color);
 		}
 
-        img {
+		img {
 			cursor: pointer;
 		}
 	}
