@@ -1,5 +1,5 @@
 <template>
-    <div id="quiz" class="flex center-vertical shadow">
+    <div @click="showQuizDetails" id="quiz" class="flex center-vertical shadow">
         <div>
             <p>{{quiz.is_completed ? '' : '(Draft)'}} {{quiz.title}}</p>
             <p>{{quiz.questions_count}} questions added</p>
@@ -10,7 +10,15 @@
 
 <script>
 export default {
-	props: { quiz: { type: Object, default: () => {} } }
+	props: { quiz: { type: Object, default: () => {} } },
+	methods: {
+		showQuizDetails() {
+			this.$router.push({
+				name: 'quiz-detail',
+				params: { quiz: this.quiz, id: this.quiz.id }
+			});
+		}
+	}
 };
 </script>
 
@@ -22,7 +30,7 @@ export default {
 	justify-content: space-between;
 	margin-bottom: 16px;
 
-	&:hover{
+	&:hover {
 		background: var(--primary-color-dark);
 		cursor: pointer;
 	}

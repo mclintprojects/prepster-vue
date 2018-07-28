@@ -25,18 +25,7 @@
             <p class="page-title">Add questions to your quiz</p>
             <empty-state v-if="questions.length === 0" src="https://res.cloudinary.com/mclint-cdn/image/upload/v1532750735/prepster/twotone-assignment-24px.svg" title="Questions" subtitle="You haven't added any question to this quiz yet" />
             <div v-if="questions.length > 0">
-                <div v-for="(question, index) in questions" :key="index" class="question flex center-vertical">
-                    <div>
-                        <div>{{index + 1}}</div>
-                        <div>
-                            <p>{{question.text}}</p>
-                            <p>{{question.answers.length}} possible answers added</p>
-                        </div>
-                        <div>
-                            <img src="https://res.cloudinary.com/mclint-cdn/image/upload/v1532758269/prepster/twotone-close-24px.svg"/>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
             <el-row>
                 <div style="margin-top: 40px; float: right;">
@@ -70,8 +59,8 @@ export default {
 	data() {
 		return {
 			pageId: 1,
-            isCreatingQuiz: false,
-            isCreatingQuestion: false,
+			isCreatingQuiz: false,
+			isCreatingQuestion: false,
 			quiz: {},
 			formData: {
 				is_public: true,
@@ -104,27 +93,27 @@ export default {
 		finishQuestions() {},
 		onAnswerSelected(index) {
 			this.question.answer = index;
-        },
-        async createQuestion(){
-            try{
-                this.isCreatingQuestion = true;
-                this.question.quiz_id = this.quiz.id;
-                const response = await axios.post('question', this.question)
-                if(response.status === 201){
-                    this.question = {
-                        text: '',
-                        answers: [{}, {}]
-                    }
+		},
+		async createQuestion() {
+			try {
+				this.isCreatingQuestion = true;
+				this.question.quiz_id = this.quiz.id;
+				const response = await axios.post('question', this.question);
+				if (response.status === 201) {
+					this.question = {
+						text: '',
+						answers: [{}, {}]
+					};
 
-                    this.questions.push(response.data);
-                    this.pageId = 2;
-                    this.isCreatingQuestion = false;
-                }
-            }catch(err){
-                this.$message.error(err.response.data.errrors[0])
-                this.isCreatingQuestion = false;
-            }
-        }
+					this.questions.push(response.data);
+					this.pageId = 2;
+					this.isCreatingQuestion = false;
+				}
+			} catch (err) {
+				this.$message.error(err.response.data.errrors[0]);
+				this.isCreatingQuestion = false;
+			}
+		}
 	}
 };
 </script>
@@ -134,14 +123,6 @@ export default {
 	font-weight: bold;
 	color: var(--primary-text-color);
 	font-size: 18px;
-}
-
-.question{
-    > div{
-        background: var(--primary-color);
-        width: 56px;
-        height: 56px;
-    }
 }
 </style>
 
