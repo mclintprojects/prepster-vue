@@ -9,7 +9,7 @@ import './theme.scss';
 
 Vue.use(Element);
 Vue.config.productionTip = false;
-axios.defaults.baseURL = 'http://localhost:3000';
+axios.defaults.baseURL = 'https://prepster.netlify.com';
 
 new Vue({
 	router,
