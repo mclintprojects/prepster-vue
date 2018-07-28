@@ -73,6 +73,19 @@ body {
 	box-shadow: 0px 4px 4px 0px rgba(167, 167, 167, 0.25);
 }
 
+.error {
+	> p {
+		color: rgba(0, 0, 0, 0.54);
+		font-size: 16px;
+	}
+	ul {
+		list-style-type: none;
+		li {
+			margin-left: 16px;
+		}
+	}
+}
+
 @media only screen and (max-width: 567px) {
 	.container {
 		width: 95%;

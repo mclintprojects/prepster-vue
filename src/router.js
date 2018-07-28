@@ -5,7 +5,6 @@ import Home from './views/Home.vue';
 import Quizzes from './views/Quizzes.vue';
 import Collections from './views/Collections.vue';
 import Search from './views/Search.vue';
-import { Col } from 'element-ui';
 
 Vue.use(Router);
 

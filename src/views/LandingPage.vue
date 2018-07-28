@@ -11,33 +11,61 @@
       <el-button id="btn-signup" class="btn btn-primary" round @click="showSignupDialog = true">Get started</el-button>
     </div>
     <el-dialog title="Login" :visible.sync="showLoginDialog">
-      <login-dialog :show="showLoginDialog" />
+      <label>Email address</label>
+			<el-input v-model="loginData.email" placeholder="Enter your email" style="margin-bottom: 16px"/>
+
+			<label>Password</label>
+			<el-input type="password" v-model="loginData.password" placeholder="Enter your password" @keyup.enter.native="loginUser"/>
+
+			<div v-if="errors.length > 0" class="error">
+				<p>Errors</p>
+				<ul>
+					<li v-for="(error, index) in errors" :key="index">{{error}}</li>
+				</ul>
+			</div>
       <span slot="footer" class="dialog-footer">
-          <el-button type="primary" round class="btn">Login</el-button>
+          <el-button type="primary" round class="btn" @click="loginUser" :loading="isLoading" :disabled="isLoading">Login</el-button>
       </span>
     </el-dialog>
 		<el-dialog title="Signup" :visible.sync="showSignupDialog">
       <signup-dialog :show="showSignupDialog" />
       <span slot="footer" class="dialog-footer">
-          <el-button type="primary" round class="btn">Signup</el-button>
+          <el-button type="primary" round class="btn" @click="signupUser" :loading="isLoading" :disabled="isLoading">Signup</el-button>
       </span>
     </el-dialog>
   </div>
 </template>
 
 <script>
-import LoginDialog from '../components/dialogs/Login';
 import SignupDialog from '../components/dialogs/Signup';
 
 export default {
-	components: { LoginDialog, SignupDialog },
+	components: { SignupDialog },
 	data() {
 		return {
 			showLoginDialog: false,
-			showSignupDialog: false
+			showSignupDialog: false,
+			loginData: {
+				email: '',
+				password: ''
+			}
 		};
 	},
-	methods: {}
+	computed: {
+		isLoading() {
+			return this.$store.getters.isLoading;
+		},
+		errors() {
+			return this.$store.getters.authErrors;
+		}
+	},
+	methods: {
+		loginUser() {
+			this.$store.dispatch('clearErrors');
+			this.$store.dispatch('loginUser', this.loginData);
+		},
+		signupUser() {}
+	}
 };
 </script>
 
