@@ -94,6 +94,7 @@ export default {
 		},
 		signupUser() {
 			this.$store.dispatch('signupUser', this.signupData);
+			this.$router.push({ name: 'quizzes' });
 		},
 		handleClose(done) {
 			this.loginData = {};
