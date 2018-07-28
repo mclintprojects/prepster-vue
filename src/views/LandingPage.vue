@@ -2,7 +2,7 @@
   <div>
     <div id="navbar" class="flex center-vertical">
       <p>Prepster</p>
-      <p @click="showLoginDialog = true">Login</p>
+      <p @click="openLoginDialog">Login</p>
     </div>
     <div id="content" class="flex center-vertical center-horizontal">
       <img src="https://res.cloudinary.com/mclint-cdn/image/upload/v1532669830/prepster/Group_14.svg" alt="logo" />
@@ -10,7 +10,7 @@
       <p>Search millions of quizzes or create and challenge your friends to your own. Attain mastery by studying with fun, competitive handmade quizzes.</p>
       <el-button id="btn-signup" class="btn btn-primary" round @click="showSignupDialog = true">Get started</el-button>
     </div>
-    <el-dialog title="Login" :visible.sync="showLoginDialog">
+    <el-dialog title="Login" :visible.sync="showLoginDialog" :before-close="handleClose">
       <label>Email address</label>
 			<el-input v-model="loginData.email" placeholder="Enter your email" style="margin-bottom: 16px"/>
 
@@ -27,25 +27,45 @@
           <el-button type="primary" round class="btn" @click="loginUser" :loading="isLoading" :disabled="isLoading">Login</el-button>
       </span>
     </el-dialog>
-		<el-dialog title="Signup" :visible.sync="showSignupDialog">
-      <signup-dialog :show="showSignupDialog" />
+		<el-dialog title="Signup" :visible.sync="showSignupDialog" :before-close="handleClose">
+      <label>First name</label>
+			<el-input v-model="signupData.first_name" placeholder="Enter your email" style="margin-bottom: 16px"/>
+
+			<label>Last name</label>
+			<el-input v-model="signupData.last_name" placeholder="Enter your email" style="margin-bottom: 16px"/>
+
+			<label>Email address</label>
+			<el-input v-model="signupData.email" placeholder="Enter your email" style="margin-bottom: 16px"/>
+
+			<label>Password</label>
+			<el-input @keyup.enter.native="signupUser" v-model="signupData.password" placeholder="Enter your password" />
+
+			<div v-if="errors.length > 0" class="error">
+				<p>Errors</p>
+				<ul>
+					<li v-for="(error, index) in errors" :key="index">{{index+1}}. {{error}}</li>
+				</ul>
+			</div>
       <span slot="footer" class="dialog-footer">
-          <el-button type="primary" round class="btn" @click="signupUser" :loading="isLoading" :disabled="isLoading">Signup</el-button>
+				<el-button type="primary" round class="btn" @click="signupUser" :loading="isLoading" :disabled="isLoading">Signup</el-button>
       </span>
     </el-dialog>
   </div>
 </template>
 
 <script>
-import SignupDialog from '../components/dialogs/Signup';
-
 export default {
-	components: { SignupDialog },
 	data() {
 		return {
 			showLoginDialog: false,
 			showSignupDialog: false,
 			loginData: {
+				email: '',
+				password: ''
+			},
+			signupData: {
+				first_name: '',
+				last_name: '',
 				email: '',
 				password: ''
 			}
@@ -64,7 +84,19 @@ export default {
 			this.$store.dispatch('clearErrors');
 			this.$store.dispatch('loginUser', this.loginData);
 		},
-		signupUser() {}
+		openLoginDialog() {
+			if (!localStorage.getItem('auth')) this.showLoginDialog = true;
+			else this.$store.dispatch('loginLocal');
+		},
+		signupUser() {
+			this.$store.dispatch('signupUser', this.signupData);
+		},
+		handleClose(done) {
+			this.loginData = {};
+			this.signupData = {};
+			this.$store.dispatch('clearErrors');
+			done();
+		}
 	}
 };
 </script>
