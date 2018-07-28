@@ -42,6 +42,10 @@ body {
 	flex-wrap: wrap;
 }
 
+.flex-column {
+	flex-direction: column;
+}
+
 .center-vertical {
 	align-items: center;
 }
@@ -105,6 +109,10 @@ body {
 			color: rgba(0, 0, 0, 0.54);
 		}
 	}
+}
+
+.hidden {
+	display: none;
 }
 
 @media only screen and (max-width: 567px) {
