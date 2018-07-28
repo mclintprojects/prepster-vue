@@ -25,8 +25,17 @@
             <p class="page-title">Add questions to your quiz</p>
             <empty-state v-if="questions.length === 0" src="https://res.cloudinary.com/mclint-cdn/image/upload/v1532750735/prepster/twotone-assignment-24px.svg" title="Questions" subtitle="You haven't added any question to this quiz yet" />
             <div v-if="questions.length > 0">
-                <div v-for="(question, index) in questions" :key="index" class="question">
-                    <div>{{index + 1}}</div>
+                <div v-for="(question, index) in questions" :key="index" class="question flex center-vertical">
+                    <div>
+                        <div>{{index + 1}}</div>
+                        <div>
+                            <p>{{question.text}}</p>
+                            <p>{{question.answers.length}} possible answers added</p>
+                        </div>
+                        <div>
+                            <img src="https://res.cloudinary.com/mclint-cdn/image/upload/v1532758269/prepster/twotone-close-24px.svg"/>
+                        </div>
+                    </div>
                 </div>
             </div>
             <el-row>
@@ -60,7 +69,7 @@ export default {
 	components: { EmptyState, Answers },
 	data() {
 		return {
-			pageId: 2,
+			pageId: 1,
             isCreatingQuiz: false,
             isCreatingQuestion: false,
 			quiz: {},
@@ -125,6 +134,14 @@ export default {
 	font-weight: bold;
 	color: var(--primary-text-color);
 	font-size: 18px;
+}
+
+.question{
+    > div{
+        background: var(--primary-color);
+        width: 56px;
+        height: 56px;
+    }
 }
 </style>
 
