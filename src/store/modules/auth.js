@@ -21,6 +21,7 @@ const mutations = {
 	loginUser: (state, data) => {
 		state.user = data.user;
 		state.token = data.token;
+		axios.defaults.headers.common['Authorization'] = `Bearer ${data.token}`;
 	},
 	setAuthErrors: (state, errors) => (state.authErrors = errors),
 	setLoading: (state, isLoading) => (state.isLoading = isLoading),
@@ -29,18 +30,23 @@ const mutations = {
 
 const actions = {
 	async loginUser({ commit }, formData) {
-		try {
-			commit('setLoading', true);
-			const response = await axios.post('auth/login', formData);
-			if (response.status === 200) {
-				commit('loginUser', response.data);
+		const json = localStorage.getItem('auth');
+		if (json) commit('loginUser', JSON.parse(json));
+		else {
+			try {
+				commit('setLoading', true);
+				const response = await axios.post('auth/login', formData);
+				if (response.status === 200) {
+					commit('loginUser', response.data);
+					commit('setLoading', false);
+					router.push('/app');
+					localStorage.setItem('auth', JSON.stringify(response.data));
+				}
+			} catch (err) {
+				console.log({ err: err.response.data });
+				commit('setAuthErrors', err.response.data.errors);
 				commit('setLoading', false);
-				router.push('/app');
 			}
-		} catch (err) {
-			console.log({ err: err.response.data });
-			commit('setAuthErrors', err.response.data.errors);
-			commit('setLoading', false);
 		}
 	},
 	setLoading: ({ commit }, isLoading) => commit('setLoading', isLoading),

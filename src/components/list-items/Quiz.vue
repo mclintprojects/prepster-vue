@@ -1,10 +1,37 @@
 <template>
-    
+    <div id="quiz" class="flex center-vertical shadow">
+        <div>
+            <p>{{quiz.is_completed ? '' : '(Draft)'}} {{quiz.title}}</p>
+            <p>{{quiz.questions_count}} questions added</p>
+        </div>
+        <el-button class="btn bg-primary" round>Finish</el-button>
+    </div>
 </template>
 
 <script>
-export default {};
+export default {
+	props: { quiz: { type: Object, default: () => {} } }
+};
 </script>
 
-<style>
+<style lang="scss">
+#quiz {
+	background: white;
+	padding: 16px;
+	border-radius: 10px;
+	justify-content: space-between;
+
+	> div {
+		p:nth-child(1) {
+			font-size: 18px;
+			font-weight: bold;
+			color: var(--primary-text-color);
+		}
+
+		p:nth-child(2) {
+			font-size: 12px;
+			color: var(--secondary-text-color);
+		}
+	}
+}
 </style>

@@ -4,6 +4,15 @@
   </div>
 </template>
 
+<script>
+export default {
+	created() {
+		this.$store.dispatch('loginUser');
+	}
+};
+</script>
+
+
 <style lang="scss">
 * {
 	margin: 0;
@@ -54,6 +63,14 @@ body {
 	border-radius: 60px !important;
 }
 
+.bg-primary {
+	background: var(--primary-color) !important;
+
+	&:hover {
+		background: var(--primary-color-dark) !important;
+	}
+}
+
 .el-dialog {
 	width: 30% !important;
 }
@@ -74,14 +91,18 @@ body {
 }
 
 .error {
+	background: tomato;
+	margin-top: 16px;
+	border-radius: 10px;
+	padding: 16px;
 	> p {
-		color: rgba(0, 0, 0, 0.54);
+		color: rgba(0, 0, 0, 0.8);
 		font-size: 16px;
 	}
 	ul {
 		list-style-type: none;
 		li {
-			margin-left: 16px;
+			color: rgba(0, 0, 0, 0.54);
 		}
 	}
 }

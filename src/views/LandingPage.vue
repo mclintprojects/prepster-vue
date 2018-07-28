@@ -20,7 +20,7 @@
 			<div v-if="errors.length > 0" class="error">
 				<p>Errors</p>
 				<ul>
-					<li v-for="(error, index) in errors" :key="index">{{error}}</li>
+					<li v-for="(error, index) in errors" :key="index">{{index+1}}. {{error}}</li>
 				</ul>
 			</div>
       <span slot="footer" class="dialog-footer">

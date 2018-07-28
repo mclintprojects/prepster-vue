@@ -1,10 +1,6 @@
-const state = {
-	quizzes: []
-};
+const state = {};
 
-const getters = {
-	quizzes: state => state.quizzes
-};
+const getters = {};
 
 const mutations = {};
 
