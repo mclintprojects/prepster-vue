@@ -21,7 +21,7 @@
 					</div>
                     <p>{{game.leaderboard[0].player}} <br/> {{game.leaderboard[0].score}}</p>
                 </div>
-                <divv-if="game.leaderboard.length == 3">
+                <div v-if="game.leaderboard.length == 3">
 					<div id="no3" class="top3">
 						<p>{{game.leaderboard[2].player[0]}}</p>
 					</div>
