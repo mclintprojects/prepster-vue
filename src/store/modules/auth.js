@@ -22,7 +22,6 @@ const mutations = {
 		state.user = data.user;
 		state.token = data.token;
 		axios.defaults.headers.common['Authorization'] = `Bearer ${data.token}`;
-		router.push({ name: 'quizzes' });
 		localStorage.setItem('auth', JSON.stringify(data));
 	},
 	logout: state => {

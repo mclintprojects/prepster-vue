@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="navbar" class="flex center-vertical">
+    <div class="navbar flex center-vertical">
       <p>Prepster</p>
       <p @click="openLoginDialog">Login</p>
     </div>
@@ -29,16 +29,16 @@
     </el-dialog>
 		<el-dialog title="Signup" :visible.sync="showSignupDialog" :before-close="handleClose">
       <label>First name</label>
-			<el-input v-model="signupData.first_name" placeholder="Enter your email" style="margin-bottom: 16px"/>
+			<el-input v-model="signupData.first_name" placeholder="Enter your first name" style="margin-bottom: 16px"/>
 
 			<label>Last name</label>
-			<el-input v-model="signupData.last_name" placeholder="Enter your email" style="margin-bottom: 16px"/>
+			<el-input v-model="signupData.last_name" placeholder="Enter your last name" style="margin-bottom: 16px"/>
 
 			<label>Email address</label>
 			<el-input v-model="signupData.email" placeholder="Enter your email" style="margin-bottom: 16px"/>
 
 			<label>Password</label>
-			<el-input @keyup.enter.native="signupUser" v-model="signupData.password" placeholder="Enter your password" />
+			<el-input type="password" @keyup.enter.native="signupUser" v-model="signupData.password" placeholder="Enter your password" />
 
 			<div v-if="errors.length > 0" class="error">
 				<p>Errors</p>
@@ -83,10 +83,14 @@ export default {
 		loginUser() {
 			this.$store.dispatch('clearErrors');
 			this.$store.dispatch('loginUser', this.loginData);
+			this.$router.push({ name: 'quizzes' });
 		},
 		openLoginDialog() {
 			if (!localStorage.getItem('auth')) this.showLoginDialog = true;
-			else this.$store.dispatch('loginLocal');
+			else {
+				this.$store.dispatch('loginLocal');
+				this.$router.push({ name: 'quizzes' });
+			}
 		},
 		signupUser() {
 			this.$store.dispatch('signupUser', this.signupData);
@@ -102,23 +106,6 @@ export default {
 </script>
 
 <style lang="scss">
-#navbar {
-	padding: 16px;
-	background: white;
-	justify-content: space-between;
-
-	p:nth-last-child(1) {
-		text-transform: uppercase;
-		font-size: 13px;
-		color: var(--secondary-text-color);
-		cursor: pointer;
-
-		&:hover {
-			color: var(--primary-text-color);
-		}
-	}
-}
-
 #content {
 	flex-direction: column;
 	min-height: calc(100vh - 57px);

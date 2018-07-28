@@ -6,8 +6,8 @@
                 <p>Created by <span>{{quiz.creator}}</span> on <span>{{getDateString(quiz.created_at)}}</span></p>
             </div>
             <div class="flex center-vertical">
-                <img style="margin-right: 16px" src="https://res.cloudinary.com/mclint-cdn/image/upload/v1532763943/prepster/twitter.svg" alt="twitter" />
-                <img style="margin-right: 16px" src="https://res.cloudinary.com/mclint-cdn/image/upload/v1532763941/prepster/facebook.svg" alt="facebook"/>
+                <a target="_blank" :href="twitterUrl"><img style="margin-right: 16px" src="https://res.cloudinary.com/mclint-cdn/image/upload/v1532763943/prepster/twitter.svg" alt="twitter" /></a>
+                <a target="_blank" :href="facebookUrl"><img style="margin-right: 16px" src="https://res.cloudinary.com/mclint-cdn/image/upload/v1532763941/prepster/facebook.svg" alt="facebook"/></a>
                 <el-button class="btn bg-primary">View leaderboard</el-button>
             </div>
         </div>
@@ -33,6 +33,17 @@ export default {
 			quiz: {},
 			questions: []
 		};
+	},
+	computed: {
+		quizUrl() {
+			return `https://prepster.netlify.com/play/${this.quiz.identifier}`;
+		},
+		facebookUrl() {
+			return `https://www.facebook.com/sharer/sharer.php?u=${this.quizUrl}`;
+		},
+		twitterUrl() {
+			return `https://twitter.com/home?status=${this.quizUrl}`;
+		}
 	},
 	methods: {
 		getDateString(date) {

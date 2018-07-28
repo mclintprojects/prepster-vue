@@ -7,6 +7,9 @@ import Collections from './views/Collections.vue';
 import Search from './views/Search.vue';
 import CreateQuiz from './views/CreateQuiz.vue';
 import QuizDetail from './views/QuizDetail.vue';
+import PreviewQuiz from './views/PreviewQuiz.vue';
+import PlayQuiz from './views/PlayQuiz.vue';
+import QuizComplete from './views/QuizComplete.vue';
 
 Vue.use(Router);
 
@@ -48,6 +51,21 @@ export default new Router({
 					component: CreateQuiz
 				}
 			]
+		},
+		{
+			path: '/play/:identifier',
+			name: 'preview',
+			component: PreviewQuiz
+		},
+		{
+			path: '/quiz/play',
+			name: 'play-quiz',
+			component: PlayQuiz
+		},
+		{
+			path: '/quiz/complete',
+			name: 'quiz-complete',
+			component: QuizComplete
 		}
 	],
 	mode: 'history'

@@ -20,8 +20,8 @@ export default {
 }
 
 :root {
-	--primary-color: #b8eeee;
-	--primary-color-dark: #6fcece;
+	--primary-color: #6ae2e2;
+	--primary-color-dark: #49c5c5;
 	--primary-text-color: rgba(0, 0, 0, 0.8);
 	--secondary-text-color: rgba(0, 0, 0, 0.54);
 }
@@ -68,10 +68,10 @@ body {
 }
 
 .bg-primary {
-	background: var(--primary-color) !important;
+	background: var(--primary-color-dark) !important;
 
 	&:hover {
-		background: var(--primary-color-dark) !important;
+		background: #54a0a0 !important;
 	}
 }
 
@@ -113,6 +113,23 @@ body {
 
 .hidden {
 	display: none;
+}
+
+.navbar {
+	padding: 16px;
+	background: white;
+	justify-content: space-between;
+
+	p:nth-last-child(1) {
+		text-transform: uppercase;
+		font-size: 13px;
+		color: var(--secondary-text-color);
+		cursor: pointer;
+
+		&:hover {
+			color: var(--primary-text-color);
+		}
+	}
 }
 
 @media only screen and (max-width: 567px) {

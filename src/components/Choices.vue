@@ -1,47 +1,32 @@
 <template>
     <div style="margin-top: 8px">
-        <el-row v-for="(answer, index) in answers" :key="index" class="answer flex center-vertical">
+        <el-row v-for="(answer, index) in question.answers" :key="index" class="answer flex center-vertical">
             <el-col :span="2">
-                <div @click="itemSelected(index)" class="checkbox" :class="{'checkbox-selected': isSelected(index)}"></div>
+                <div @click="choiceMade(index)" class="checkbox" :class="{'checkbox-selected': isSelected(index)}"></div>
             </el-col>
             <el-col :span="22">
-                <el-input v-model="answers[index].text" type="text" placeholder="Enter a possible answer here">
-                    <el-button @click="deletePossibleAnswer(index)" v-if="answers.length > 1" slot="append" type="danger" icon="el-icon-delete" round/>
-                </el-input>
+                <p>{{answer.text}}</p>
             </el-col>
         </el-row>
-        <div id="btn-add-possible-answer" @click="addPossibleAnswer">
-            <p>+ Add a new possible answer</p>
-        </div>
     </div>
 </template>
 
 <script>
 export default {
-	props: { answers: Array, onItemSelected: Function },
+	props: { question: Object, onChoiceMade: Function },
 	data() {
 		return {
 			selected: -1
 		};
 	},
-	watch: {
-		answers() {
-			if (this.answers.length === 0) this.selected = -1;
-		}
-	},
 	methods: {
-		addPossibleAnswer() {
-			this.answers.push({});
-		},
-		deletePossibleAnswer(index) {
-			this.answers.splice(index, 1);
-		},
 		isSelected(index) {
 			return this.selected == index;
 		},
-		itemSelected(index) {
+		choiceMade(index) {
 			this.selected = index;
-			this.onItemSelected(index);
+			this.onChoiceMade(this.question.id, this.question.answers[index].id);
+			this.selected = -1;
 		}
 	}
 };
