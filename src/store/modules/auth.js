@@ -29,11 +29,14 @@ const mutations = {
 		state.user = {};
 		state.userIsLoggedIn = false;
 		state.token = '';
-		router.push('/');
+		window.location.replace(window.location.origin);
 	},
 	setAuthErrors: (state, errors) => (state.authErrors = errors),
 	setLoading: (state, isLoading) => (state.isLoading = isLoading),
-	clearErrors: state => (state.authErrors = [])
+	clearErrors: state => (state.authErrors = []),
+	gotoHome: () => {
+		router.push({ name: 'quizzes' });
+	}
 };
 
 const actions = {
@@ -44,6 +47,7 @@ const actions = {
 			if (response.status === 200) {
 				commit('loginUser', response.data);
 				commit('setLoading', false);
+				commit('gotoHome');
 			}
 		} catch (err) {
 			commit('setAuthErrors', err.response.data.errors);

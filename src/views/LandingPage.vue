@@ -83,7 +83,6 @@ export default {
 		loginUser() {
 			this.$store.dispatch('clearErrors');
 			this.$store.dispatch('loginUser', this.loginData);
-			this.$router.push({ name: 'quizzes' });
 		},
 		openLoginDialog() {
 			if (!localStorage.getItem('auth')) this.showLoginDialog = true;
