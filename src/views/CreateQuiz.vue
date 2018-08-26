@@ -71,115 +71,129 @@ import Answers from '../components/Answers';
 import Question from '../components/list-items/Question';
 
 export default {
-	components: { EmptyState, Answers, Question },
-	data() {
-		return {
-			pageId: 1,
-			isCreatingQuiz: false,
-			isCreatingQuestion: false,
-			isFinalizingQuiz: false,
-			quizUrl: '',
-			quiz: {},
-			formData: {
-				is_public: true,
-				duration: 5,
-				title: ''
-			},
-			questions: [],
-			question: {
-				text: '',
-				answers: [{}, {}]
-			}
-		};
-	},
-	computed: {
-		facebookUrl() {
-			return `https://www.facebook.com/sharer/sharer.php?u=${this.quizUrl}`;
-		},
-		twitterUrl() {
-			return `https://twitter.com/home?status=${this.quizUrl}`;
-		}
-	},
-	methods: {
-		async createQuiz() {
-			try {
-				this.isCreatingQuiz = true;
-				const response = await axios.post('quiz', this.formData);
-				if (response.status === 201) {
-					this.isCreatingQuiz = false;
-					this.pageId = 2;
-					this.quiz = response.data;
-				}
-			} catch (err) {
-				console.log({ err });
-				this.isCreatingQuiz = false;
-				this.$message.error(err.response.data.errors[0]);
-			}
-		},
-		finishQuestions() {},
-		onAnswerSelected(index) {
-			this.question.answer = index;
-		},
-		async createQuestion() {
-			try {
-				this.isCreatingQuestion = true;
-				this.question.quiz_id = this.quiz.id;
-				const response = await axios.post('question', this.question);
-				if (response.status === 201) {
-					this.question = {
-						text: '',
-						answers: [{}, {}]
-					};
+    components: { EmptyState, Answers, Question },
+    data() {
+        return {
+            pageId: 1,
+            isCreatingQuiz: false,
+            isCreatingQuestion: false,
+            isFinalizingQuiz: false,
+            answerChosen: false,
+            quizUrl: '',
+            quiz: {},
+            formData: {
+                is_public: true,
+                duration: 5,
+                title: ''
+            },
+            questions: [],
+            question: {
+                text: '',
+                answers: [{}, {}]
+            }
+        };
+    },
+    computed: {
+        facebookUrl() {
+            return `https://www.facebook.com/sharer/sharer.php?u=${
+                this.quizUrl
+            }`;
+        },
+        twitterUrl() {
+            return `https://twitter.com/home?status=${this.quizUrl}`;
+        }
+    },
+    methods: {
+        async createQuiz() {
+            try {
+                this.isCreatingQuiz = true;
+                const response = await axios.post('quiz', this.formData);
+                if (response.status === 201) {
+                    this.isCreatingQuiz = false;
+                    this.pageId = 2;
+                    this.quiz = response.data;
+                    this.answerChosen = false;
+                }
+            } catch (err) {
+                console.log({ err });
+                this.isCreatingQuiz = false;
+                this.$message.error(err.response.data.errors[0]);
+            }
+        },
+        finishQuestions() {},
+        onAnswerSelected(index) {
+            this.question.answer = index;
+            this.answerChosen = true;
+        },
+        async createQuestion() {
+            if (this.answerChosen) {
+                try {
+                    this.isCreatingQuestion = true;
+                    this.question.quiz_id = this.quiz.id;
+                    const response = await axios.post(
+                        'question',
+                        this.question
+                    );
+                    if (response.status === 201) {
+                        this.question = {
+                            text: '',
+                            answers: [{}, {}]
+                        };
 
-					this.questions.push(response.data);
-					this.pageId = 2;
-					this.isCreatingQuestion = false;
-				}
-			} catch (err) {
-				this.$message.error(err.response.data.errors[0]);
-				this.isCreatingQuestion = false;
-			}
-		},
-		async finalizeQuiz() {
-			try {
-				this.isFinalizingQuiz = true;
-				const response = await axios.post(
-					`quiz/finalize?quiz_id=${this.quiz.id}`
-				);
-				if (response.status === 200) {
-					this.pageId = 4;
-					this.quizUrl = `https://prepster.netlify.com/play/${
-						response.data.quiz_url
-					}`;
-					this.isFinalizingQuiz = false;
-				}
-			} catch (err) {
-				this.$message.error(err.response.data.errors[0]);
-				this.isFinalizingQuiz = false;
-			}
-		},
-		navigateAway() {
-			this.$router.go(-1);
-		}
-	}
+                        this.questions.push(response.data);
+                        this.pageId = 2;
+                        this.isCreatingQuestion = false;
+                    }
+                } catch (err) {
+                    this.$message.error(err.response.data.errors[0]);
+                    this.isCreatingQuestion = false;
+                }
+            } else {
+                this.$message.error(
+                    'Hey! You forgot to select the answer for this question.'
+                );
+            }
+        },
+        async finalizeQuiz() {
+            try {
+                this.isFinalizingQuiz = true;
+                const response = await axios.post(
+                    `quiz/finalize?quiz_id=${this.quiz.id}`
+                );
+                if (response.status === 200) {
+                    this.pageId = 4;
+                    this.quizUrl = `https://prepster.netlify.com/play/${
+                        response.data.quiz_url
+                    }`;
+                    this.isFinalizingQuiz = false;
+                }
+            } catch (err) {
+                this.$message.error(err.response.data.errors[0]);
+                this.isFinalizingQuiz = false;
+            }
+        },
+        navigateAway() {
+            this.$router.go(-1);
+        }
+    }
 };
 </script>
 
 <style lang="scss">
 .page-title {
-	font-weight: bold;
-	color: var(--primary-text-color);
-	font-size: 18px;
+    font-weight: bold;
+    color: var(--primary-text-color);
+    font-size: 18px;
 }
 
 #social-container {
-	img {
-		transition: all 1s;
-		&:hover {
-			cursor: pointer;
-			transform: scale(1.1);
-		}
-	}
+    img {
+        transition: all 1s;
+        &:hover {
+            cursor: pointer;
+            transform: scale(1.1);
+        }
+    }
 }
 </style>
 

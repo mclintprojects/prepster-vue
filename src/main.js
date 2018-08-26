@@ -9,10 +9,12 @@ import './theme.scss';
 
 Vue.use(Element);
 Vue.config.productionTip = false;
-axios.defaults.baseURL = 'https://prepster.herokuapp.com';
 
 new Vue({
-	router,
-	store,
-	render: h => h(App)
+    router,
+    store,
+    render: h => h(App),
+    created() {
+        axios.defaults.baseURL = this.$store.getters.baseURL;
+    }
 }).$mount('#app');
