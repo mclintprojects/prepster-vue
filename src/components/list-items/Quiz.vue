@@ -1,10 +1,10 @@
 <template>
-    <div id="quiz" class="flex center-vertical shadow">
-        <div @click="showQuizDetails">
+    <div @click="showQuizDetails" id="quiz" class="flex center-vertical shadow">
+        <div>
             <p>{{quiz.is_completed ? '' : '(Draft)'}} {{quiz.title}}</p>
             <p>{{quiz.questions_count}} {{quiz.questions_count == 1 ? 'question' : 'questions'}} added</p>
         </div>
-		<el-button @click="deleteQuiz" size="small" type="danger" :disabled="isDeletingQuiz" :loading="isDeletingQuiz" round>Delete</el-button>
+		<el-button @click="deleteQuiz($event)" size="small" type="danger" :disabled="isDeletingQuiz" :loading="isDeletingQuiz" round>Delete</el-button>
     </div>
 </template>
 
@@ -29,7 +29,8 @@ export default {
                 params: { quiz: this.quiz, id: this.quiz.id }
             });
         },
-        async deleteQuiz() {
+        async deleteQuiz(event) {
+            event.stopPropagation();
             try {
                 this.isDeletingQuiz = true;
                 const response = await axios.delete(
