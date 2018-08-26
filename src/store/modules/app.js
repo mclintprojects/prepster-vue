@@ -1,5 +1,6 @@
 const state = {
-    baseURL: 'http://localhost:5000'
+    //baseURL: 'http://localhost:5000'
+    baseURL: 'https://prepster.herokuapp.com'
 };
 
 const getters = {
